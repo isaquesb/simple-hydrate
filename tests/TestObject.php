@@ -2,8 +2,10 @@
 
 use Simple\Hydrate;
 
-class TestObject
+class TestObject extends Hydrate\Entity
 {
+    use Hydrate\HydrateConstructorTrait;
+
     /**
      * Name
      * @var string
@@ -16,21 +18,26 @@ class TestObject
      */
     protected $age = 18;
 
-    use Hydrate\HydrateTrait, Hydrate\HydrateProtectedTrait, Hydrate\HydrateConstructorTrait {
-        Hydrate\HydrateProtectedTrait::hydrate insteadof Hydrate\HydrateTrait;
-    }
-
     /**
      * Constructor
      * @param array|string $data
      */
     public function __construct($data = [])
     {
-        $args = func_get_args();
         if (is_array($data)) {
-            $this->hydrate($data);
+            parent::__construct($data);
+        } else {
+            $args = func_get_args();
+            $this->hydrateByArgs(['name', 'age'], $args);
         }
-        $this->hydrateByArgs(['name', 'age'], $args);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return ucfirst(strtolower($this->name));
     }
 
     /**

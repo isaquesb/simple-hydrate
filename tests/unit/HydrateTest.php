@@ -34,4 +34,23 @@ class HydrateTest extends TestCase
             'age' => 10,
         ], $obj->toArray());
     }
+
+    public function testGetNameRuleWithOffisetGet()
+    {
+        $obj = new \TestObject('ISAQUE');
+        $this->assertEquals('Isaque', $obj->name);
+    }
+
+    public function testGetAgeWithOffisetSet()
+    {
+        $obj = new \TestObject('ISAQUE');
+        $obj->age = 16;
+        $this->assertEquals($obj->getAge(), 16);
+    }
+
+    public function testGetNameWithArrayAccess()
+    {
+        $obj = new \TestObject('ISAQUE');
+        $this->assertEquals('Isaque', $obj['name']);
+    }
 }
