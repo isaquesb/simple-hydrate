@@ -1,7 +1,7 @@
 {
     "name": "isaquesb/simple-hydrate",
     "description": "Simple Data Hydrate",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Isaque de Souza",
